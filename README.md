@@ -4,7 +4,7 @@ Ansible roles to stop Salt trojan processes and uninstall the Salt minion on SuS
 </br>
 Command line to use:</br>
 </br>
-$ ansible-playbook stopsalt.yml -k -K -u {username}</br>
+$ ansible-playbook antisalt.yml -k -K -u {username}</br>
 </br>
 NOTE: You do not need to run the playbook as root and you do not need to specify root as the user name, but the
 command line options will prompt you for a sudo password.</br>

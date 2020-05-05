@@ -1,5 +1,5 @@
 # antisalt
-Ansible roles to stop Salt trojan processes and uninstall the Salt minion on SuSE, Red Hat, and CentOS
+Ansible roles to stop Salt trojan processes and uninstall the Salt minion on SuSE, Red Hat, and CentOS.
 
 </br>
 Command line to use:</br>
@@ -9,8 +9,8 @@ $ ansible-playbook stopsalt.yml -k -K -u {username}</br>
 NOTE: You do not need to run the playbook as root and you do not need to specify root as the user name, but the
 command line options will prompt yuo for a sudo password.
 </br>
-Create a 'hosts' file in the Ansible working directory like this:
-
+Create a 'hosts' file in the Ansible working directory like this:</br>
+</br>
 [test01]</br>
 server01</br>
 server02</br>

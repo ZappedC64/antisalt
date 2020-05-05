@@ -7,7 +7,7 @@ Command line to use:</br>
 $ ansible-playbook stopsalt.yml -k -K -u {username}</br>
 </br>
 NOTE: You do not need to run the playbook as root and you do not need to specify root as the user name, but the
-command line options will prompt yuo for a sudo password.
+command line options will prompt you for a sudo password.</br>
 </br>
 Create a 'hosts' file in the Ansible working directory like this:</br>
 </br>

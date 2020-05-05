@@ -1,0 +1,62 @@
+---
+# file: roles/rmsalt/tasks/main.yml
+
+- name: Stop salt minion service - systemd
+  systemd:
+    state: stopped
+    enabled: no
+    name: salt-minion.service
+  ignore_errors: yes
+  when: (ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "7") or
+        (ansible_facts['distribution'] == "SLES_SAP" and ansible_facts['distribution_major_version'] == "12") or
+        (ansible_facts['distribution'] == "SLES" and ansible_facts['distribution_major_version'] == "15")
+
+- name: Stop salt minion service - SysV
+  service:
+    state: stopped
+    name: salt-minion
+  ignore_errors: yes
+  when: (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6") or
+        (ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "6") or
+        (ansible_facts['distribution'] == "SLES" and ansible_facts['distribution_major_version'] == "11")
+
+- name: Disable salt minion service - systemd
+  systemd:
+    enabled: no
+    name: salt-minion.service
+  ignore_errors: yes
+  when: (ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "7") or
+        (ansible_facts['distribution'] == "SLES_SAP" and ansible_facts['distribution_major_version'] == "12") or
+        (ansible_facts['distribution'] == "SLES" and ansible_facts['distribution_major_version'] == "15")
+
+
+- name: Disable salt minion service - SysV
+  service:
+    enabled: no
+    name: salt-minion
+  ignore_errors: yes
+  when: (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6") or
+        (ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "6") or
+        (ansible_facts['distribution'] == "SLES" and ansible_facts['distribution_major_version'] == "11")
+
+- name: Remove Salt minion - RedHat / CentOS
+  yum:
+    state: absent
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - salt-minion
+      - salt
+  ignore_errors: yes
+  when: (ansible_facts['distribution'] == "RedHat") or
+        (ansible_facts['distribution'] == "CentOS")
+
+- name: Remove Salt minion - SuSE
+  zypper:
+    state: absent
+    name: salt-minion
+  ignore_errors: yes
+  when: (ansible_facts['distribution'] == "SUSE") or
+        (ansible_facts['distribution'] == "SLES") or
+        (ansible_facts['distribution'] == "SLES_SAP")
+

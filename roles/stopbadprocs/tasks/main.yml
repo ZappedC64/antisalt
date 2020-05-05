@@ -1,0 +1,16 @@
+---
+- name: Force kill salt-minions process
+  ignore_errors: yes
+  shell: "pkill -9 salt-minions"
+- name: Force kill salt-store process
+  ignore_errors: yes
+  shell: "pkill -9 salt-store"
+- name: Delete /tmp/salt-minions (recusively)
+  file:
+    path: /tmp/salt-minions
+    state: absent
+- name: Delete /var/tmp/salt-store (recusively)
+  file:
+    path: /var/tmp/salt-store
+    state: absent
+

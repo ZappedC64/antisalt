@@ -1,0 +1,7 @@
+---
+- hosts: test02
+  become: yes
+  roles:
+    - stopbadprocs
+    - rmsalt
+
